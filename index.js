@@ -10,6 +10,20 @@ const db = new Database("Chinook_Sqlite.sqlite");
  *    We want all columns of data listed on each employee
  * 2) Use the 'all' method to execute the prepared statement so it returns all matching rows received from the query
  */
+
+const listAllDataInTable = (columns, tableName) => {
+  if (typeof columns === "string" && columns === "*") {
+    return db.prepare(`SELECT * FROM ${tableName}`).all();
+  }
+
+  if (Array.isArray(columns)) {
+    return true;
+  }
+};
+
+const list = listAllDataInTable("*", "Employee");
+console.log("list all employees: ", list);
+
 // const readStatement = db.prepare("SELECT * FROM Employee").all();
 // console.log(readStatement);
 
@@ -60,14 +74,14 @@ const db = new Database("Chinook_Sqlite.sqlite");
  * 3) Now that we have the employee id, create a statement to delete user data and run the statement
  */
 
-const findEmployeeStatement = db
-  .prepare(
-    "SELECT * FROM Employee WHERE FirstName='Claudia' AND LastName='Nielsen'"
-  )
-  .get();
-const foundEmployeeId = findEmployeeStatement["EmployeeId"];
-console.log(foundEmployeeId);
+// const findEmployeeStatement = db
+//   .prepare(
+//     "SELECT * FROM Employee WHERE FirstName='Claudia' AND LastName='Nielsen'"
+//   )
+//   .get();
+// const foundEmployeeId = findEmployeeStatement["EmployeeId"];
+// console.log(foundEmployeeId);
 
-const deleteStatement = db.prepare("DELETE FROM Employee WHERE EmployeeId = ?");
-const deleteEmployee = deleteStatement.run(`${foundEmployeeId}`);
-console.log(deleteEmployee);
+// const deleteStatement = db.prepare("DELETE FROM Employee WHERE EmployeeId = ?");
+// const deleteEmployee = deleteStatement.run(`${foundEmployeeId}`);
+// console.log(deleteEmployee);
