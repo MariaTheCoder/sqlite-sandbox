@@ -21,8 +21,8 @@ const listAllDataInTable = (columns, tableName) => {
   }
 };
 
-const list = listAllDataInTable("*", "Employee");
-console.log("list all employees: ", list);
+// const list = listAllDataInTable("*", "Employee");
+// console.log("list all employees: ", list);
 
 // const readStatement = db.prepare("SELECT * FROM Employee").all();
 // console.log(readStatement);
@@ -34,12 +34,16 @@ console.log("list all employees: ", list);
  * 2) Use the 'run' method to execute the prepared statement. This returns an info object.
  */
 
-// const insertStatement = db.prepare(
-//   "INSERT INTO Employee (LastName, FirstName) VALUES (?, ?)"
-// );
+const createNewDataRow = (tableName) => {
+  const insertStatement = db.prepare(
+    `INSERT INTO ${tableName} (LastName, FirstName) VALUES (?, ?)`
+  );
 
-// const info = insertStatement.run("Nielsen", "Klaus");
-// console.log(info);
+  return insertStatement.run("Nielsen", "Klaus");
+};
+
+const info = createNewDataRow("Employee");
+console.log(info);
 
 /**
  * UPDATE EMPLOYEE DATA
