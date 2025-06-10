@@ -45,6 +45,9 @@ const createNewDataRow = (tableName) => {
 const info = createNewDataRow("Employee");
 console.log(info);
 
+const list = listAllDataInTable("*", "Employee");
+console.log("list new employee: ", list[list.length - 1]);
+
 /**
  * UPDATE EMPLOYEE DATA
  *
